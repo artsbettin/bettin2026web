@@ -6,10 +6,12 @@
     <title>Bettinwear | Official Store</title>
 
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta property="og:title" content="Bettinwear | Coming Soon">
-    <meta property="og:description" content="Francia • España • Portugal. Suscríbete y recibe un regalo exclusivo el día del lanzamiento.">
+    <meta property="og:title" content="Bettinwear | Official Store">
+    <meta property="og:description" content="Francia • España • Portugal. Únete a la lista privada y recibe un obsequio exclusivo el 01.04.">
     <meta property="og:image" content="preview.png">
     <meta property="og:url" content="https://bettinwear.com">
+
+    <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=pk_4e9930ef2b13354fccd3795c1c91d8cb88"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
     <style>
@@ -23,7 +25,7 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px 40px;
+            padding: 20px 20px;
             box-sizing: border-box;
             text-align: center;
             overflow-x: hidden;
@@ -35,6 +37,8 @@
             font-weight: 100;
             text-transform: uppercase;
             margin-bottom: 0;
+            width: 100%;
+            display: block;
         }
 
         .magenta { color: #CF3476; font-weight: 200; }
@@ -47,8 +51,8 @@
         }
 
         .paises {
-            font-size: 0.9rem;
-            letter-spacing: 5px;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
             color: #888;
             font-weight: 200;
@@ -60,14 +64,14 @@
             letter-spacing: 8px;
             text-transform: uppercase;
             font-weight: 300;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
-        /* ESTILOS DEL FORMULARIO KLAVIYO/EMAIL */
+        /* KLAVIYO FORM */
         .newsletter-container {
             margin-bottom: 50px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
         }
 
         .gift-text {
@@ -77,9 +81,10 @@
             text-transform: uppercase;
             margin-bottom: 15px;
             font-weight: 400;
+            line-height: 1.5;
         }
 
-        .email-form {
+        .klaviyo_styling {
             display: flex;
             gap: 10px;
         }
@@ -88,45 +93,57 @@
             background: transparent;
             border: 1px solid #333;
             color: white;
-            padding: 12px 15px;
+            padding: 14px 15px;
             flex-grow: 1;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
-            transition: border 0.3s;
+            transition: all 0.3s;
+            border-radius: 0;
+            -webkit-appearance: none;
         }
 
         input[type="email"]:focus { border-color: #CF3476; }
 
-        button {
+        .btn-submit {
             background-color: #CF3476;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 14px 30px;
             font-family: 'Inter', sans-serif;
             font-weight: 400;
             letter-spacing: 2px;
             cursor: pointer;
             text-transform: uppercase;
             transition: opacity 0.3s;
+            border-radius: 0;
         }
 
-        button:hover { opacity: 0.8; }
+        .btn-submit:hover { opacity: 0.8; }
 
         .countdown {
             font-size: 3rem;
             font-weight: 100;
             letter-spacing: 4px;
             font-variant-numeric: tabular-nums;
-            margin-top: 20px;
         }
 
+        /* MOBILE FIXES - SEGURIDAD TOTAL PARA LA "R" */
         @media (max-width: 480px) {
-            .logo { font-size: 1.8rem; letter-spacing: 6px; }
+            .logo { 
+                font-size: 1.7rem; 
+                letter-spacing: 6px; /* Reducido para que la R no se corte nunca */
+                padding: 0 5px;
+            }
+            .divider { margin: 30px 0; }
             .coming-soon { font-size: 1rem; letter-spacing: 5px; }
-            .countdown { font-size: 2rem; }
-            .email-form { flex-direction: column; }
-            button { width: 100%; }
+            .countdown { font-size: 2.2rem; letter-spacing: 2px; }
+            .klaviyo_styling { flex-direction: column; gap: 15px; }
+            .btn-submit { width: 100%; }
+        }
+
+        @media (max-width: 340px) {
+            .logo { font-size: 1.4rem; letter-spacing: 4px; }
         }
     </style>
 </head>
@@ -140,10 +157,12 @@
     <div class="coming-soon">Coming Soon</div>
 
     <div class="newsletter-container">
-        <div class="gift-text">Únete y recibe un regalo exclusivo el día 1</div>
-        <form class="email-form">
-            <input type="email" placeholder="TU EMAIL" required>
-            <button type="submit">UNIRSE</button>
+        <div class="gift-text">Únete a la lista privada y recibe un obsequio exclusivo en la apertura</div>
+        
+        <form id="email_signup" class="klaviyo_styling" action="//manage.kmail-lists.com/subscriptions/subscribe" method="POST">
+            <input type="hidden" name="g" value="LIST_ID_AQUÍ">
+            <input type="email" name="email" id="k_id_email" placeholder="TU EMAIL" required>
+            <button type="submit" class="btn-submit">UNIRSE</button>
         </form>
     </div>
 
