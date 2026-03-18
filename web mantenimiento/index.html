@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bettinwear | Coming Soon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #000;
@@ -16,17 +16,18 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 40px 20px; /* Más espacio en los bordes */
+            padding: 30px;
             box-sizing: border-box;
             text-align: center;
+            overflow: hidden;
         }
 
         .logo {
-            font-size: 3.2rem; /* Mucho más grande */
-            letter-spacing: 15px; /* Más espaciado para que ocupe ancho */
+            font-size: 3.8rem;
+            letter-spacing: 18px;
             font-weight: 100;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 0;
             width: 100%;
         }
 
@@ -36,53 +37,44 @@
         }
 
         .divider {
-            width: 80px; /* Línea un poco más larga */
+            width: 100px;
             height: 1px;
             background-color: #CF3476;
-            margin: 40px 0; /* Más separación */
+            margin: 50px 0;
         }
 
         .paises {
-            font-size: 0.9rem; /* Letra más legible */
-            letter-spacing: 5px;
+            font-size: 1rem;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            color: #aaa;
+            color: #888;
             font-weight: 200;
             margin-bottom: 15px;
         }
 
         .coming-soon {
-            font-size: 1.2rem; /* Más presencia */
-            letter-spacing: 8px;
+            font-size: 1.6rem;
+            letter-spacing: 12px;
             text-transform: uppercase;
             color: #fff;
             font-weight: 300;
-            margin-bottom: 60px; /* Más espacio antes del reloj */
+            margin-bottom: 60px;
         }
 
         .countdown {
-            font-size: 3.5rem; /* El reloj ahora es el protagonista */
+            font-size: 4rem; /* Tamaño grande e impactante */
             font-weight: 100;
-            letter-spacing: 4px;
-            color: #fff;
+            letter-spacing: 5px;
+            font-variant-numeric: tabular-nums; /* Evita que los números bailen */
         }
 
-        /* Ajustes para móviles (pantallas pequeñas y verticales) */
+        /* Optimización para móviles (Vertical) */
         @media (max-width: 480px) {
-            .logo {
-                font-size: 2.2rem; /* Se ajusta para que no se corte en móvil */
-                letter-spacing: 10px;
-            }
-            .countdown {
-                font-size: 2.2rem;
-            }
-            .paises {
-                font-size: 0.7rem;
-                letter-spacing: 3px;
-            }
-            .coming-soon {
-                font-size: 0.9rem;
-            }
+            .logo { font-size: 2.8rem; letter-spacing: 10px; }
+            .divider { margin: 40px 0; }
+            .paises { font-size: 0.8rem; letter-spacing: 4px; }
+            .coming-soon { font-size: 1.2rem; letter-spacing: 8px; }
+            .countdown { font-size: 2.5rem; letter-spacing: 2px; }
         }
     </style>
 </head>
@@ -96,15 +88,20 @@
     
     <div class="coming-soon">Coming Soon</div>
 
-    <div class="countdown" id="timer">00d 00h 00m 00s</div>
+    <div class="countdown" id="timer">Cargando...</div>
 
     <script>
-        // Cuenta atrás de 15 días
-        const targetDate = new Date().getTime() + (15 * 24 * 60 * 60 * 1000);
+        // CONFIGURACIÓN EXACTA: 1 de Abril de 2026 a las 21:00h
+        const targetDate = new Date("April 1, 2026 21:00:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("timer").innerHTML = "OPEN NOW";
+                return;
+            }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
