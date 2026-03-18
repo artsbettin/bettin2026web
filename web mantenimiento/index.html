@@ -9,7 +9,6 @@
     <meta property="og:title" content="Bettinwear | Official Store">
     <meta property="og:description" content="Francia • España • Portugal. Únete a la lista privada y recibe un obsequio exclusivo el 01.04.">
     <meta property="og:image" content="preview.png">
-    <meta property="og:url" content="https://bettinwear.com">
 
     <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=pk_4e9930ef2b13354fccd3795c1c91d8cb88"></script>
 
@@ -25,7 +24,7 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px 20px;
+            padding: 20px 30px; /* Margen lateral de seguridad */
             box-sizing: border-box;
             text-align: center;
             overflow-x: hidden;
@@ -38,7 +37,6 @@
             text-transform: uppercase;
             margin-bottom: 0;
             width: 100%;
-            display: block;
         }
 
         .magenta { color: #CF3476; font-weight: 200; }
@@ -67,7 +65,6 @@
             margin-bottom: 35px;
         }
 
-        /* KLAVIYO FORM */
         .newsletter-container {
             margin-bottom: 50px;
             width: 100%;
@@ -81,7 +78,6 @@
             text-transform: uppercase;
             margin-bottom: 15px;
             font-weight: 400;
-            line-height: 1.5;
         }
 
         .klaviyo_styling {
@@ -96,11 +92,8 @@
             padding: 14px 15px;
             flex-grow: 1;
             font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
             outline: none;
-            transition: all 0.3s;
             border-radius: 0;
-            -webkit-appearance: none;
         }
 
         input[type="email"]:focus { border-color: #CF3476; }
@@ -110,58 +103,37 @@
             color: white;
             border: none;
             padding: 14px 30px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            letter-spacing: 2px;
             cursor: pointer;
             text-transform: uppercase;
-            transition: opacity 0.3s;
+            letter-spacing: 2px;
             border-radius: 0;
         }
-
-        .btn-submit:hover { opacity: 0.8; }
 
         .countdown {
             font-size: 3rem;
             font-weight: 100;
             letter-spacing: 4px;
-            font-variant-numeric: tabular-nums;
         }
 
-        /* MOBILE FIXES - SEGURIDAD TOTAL PARA LA "R" */
         @media (max-width: 480px) {
-            .logo { 
-                font-size: 1.7rem; 
-                letter-spacing: 6px; /* Reducido para que la R no se corte nunca */
-                padding: 0 5px;
-            }
-            .divider { margin: 30px 0; }
+            .logo { font-size: 1.7rem; letter-spacing: 6px; }
             .coming-soon { font-size: 1rem; letter-spacing: 5px; }
-            .countdown { font-size: 2.2rem; letter-spacing: 2px; }
-            .klaviyo_styling { flex-direction: column; gap: 15px; }
-            .btn-submit { width: 100%; }
-        }
-
-        @media (max-width: 340px) {
-            .logo { font-size: 1.4rem; letter-spacing: 4px; }
+            .countdown { font-size: 2.2rem; }
+            .klaviyo_styling { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
     <div class="logo">BETTIN<span class="magenta">W</span>EAR</div>
-    
     <div class="divider"></div>
-
     <div class="paises">Francia • España • Portugal</div>
     <div class="coming-soon">Coming Soon</div>
 
     <div class="newsletter-container">
-        <div class="gift-text">Únete a la lista privada y recibe un obsequio exclusivo en la apertura</div>
-        
-        <form id="email_signup" class="klaviyo_styling" action="//manage.kmail-lists.com/subscriptions/subscribe" method="POST">
-            <input type="hidden" name="g" value="LIST_ID_AQUÍ">
-            <input type="email" name="email" id="k_id_email" placeholder="TU EMAIL" required>
+        <div class="gift-text" id="status-msg">Únete a la lista privada y recibe un obsequio exclusivo en la apertura</div>
+        <form id="email_signup" class="klaviyo_styling">
+            <input type="email" id="k_id_email" placeholder="TU EMAIL" required>
             <button type="submit" class="btn-submit">UNIRSE</button>
         </form>
     </div>
@@ -169,14 +141,12 @@
     <div class="countdown" id="timer">...</div>
 
     <script>
+        // Reloj
         const targetDate = new Date("April 1, 2026 21:00:00").getTime();
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
-            if (distance < 0) {
-                document.getElementById("timer").innerHTML = "OPEN NOW";
-                return;
-            }
+            if (distance < 0) { document.getElementById("timer").innerHTML = "OPEN NOW"; return; }
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -186,6 +156,33 @@
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // Envío Klaviyo (AJAX)
+        document.getElementById('email_signup').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('k_id_email').value;
+            const btn = e.target.querySelector('button');
+            const msg = document.getElementById('status-msg');
+            btn.innerHTML = "...";
+            btn.disabled = true;
+
+            fetch('https://manage.kmail-lists.com/ajax/subscriptions/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    'g': 'Xyn3sR', // Tu List ID real de Klaviyo
+                    '$fields': '$source',
+                    '$source': 'Web Mantenimiento',
+                    'email': email
+                })
+            })
+            .then(() => {
+                msg.innerHTML = "¡GRACIAS! TE HEMOS AÑADIDO A LA LISTA";
+                msg.style.color = "#fff";
+                e.target.style.display = 'none';
+            })
+            .catch(() => { btn.innerHTML = "ERROR"; btn.disabled = false; });
+        });
     </script>
 </body>
 </html>
