@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bettinwear | Coming Soon</title>
+    <title>Bettinwear | Official Store</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta property="og:title" content="Bettinwear | Coming Soon">
+    <meta property="og:description" content="Francia • España • Portugal. Suscríbete y recibe un regalo exclusivo el día del lanzamiento.">
+    <meta property="og:image" content="preview.png">
+    <meta property="og:url" content="https://bettinwear.com">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -16,86 +23,110 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px 30px; /* Margen lateral de seguridad */
+            padding: 20px 40px;
             box-sizing: border-box;
             text-align: center;
-            overflow-x: hidden; /* Evita que aparezca barra de desplazamiento */
+            overflow-x: hidden;
         }
 
         .logo {
-            font-size: 3.8rem;
-            letter-spacing: 18px;
+            font-size: 3.5rem;
+            letter-spacing: 15px;
             font-weight: 100;
             text-transform: uppercase;
             margin-bottom: 0;
-            width: 100%;
-            display: block;
         }
 
-        .magenta {
-            color: #CF3476;
-            font-weight: 200;
-        }
+        .magenta { color: #CF3476; font-weight: 200; }
 
         .divider {
-            width: 80px;
+            width: 60px;
             height: 1px;
             background-color: #CF3476;
-            margin: 50px 0;
+            margin: 40px 0;
         }
 
         .paises {
-            font-size: 1rem;
-            letter-spacing: 6px;
+            font-size: 0.9rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
             color: #888;
             font-weight: 200;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .coming-soon {
-            font-size: 1.6rem;
-            letter-spacing: 10px;
+            font-size: 1.4rem;
+            letter-spacing: 8px;
             text-transform: uppercase;
-            color: #fff;
             font-weight: 300;
-            margin-bottom: 60px;
+            margin-bottom: 30px;
         }
 
+        /* ESTILOS DEL FORMULARIO KLAVIYO/EMAIL */
+        .newsletter-container {
+            margin-bottom: 50px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .gift-text {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #CF3476;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="email"] {
+            background: transparent;
+            border: 1px solid #333;
+            color: white;
+            padding: 12px 15px;
+            flex-grow: 1;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input[type="email"]:focus { border-color: #CF3476; }
+
+        button {
+            background-color: #CF3476;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
+        }
+
+        button:hover { opacity: 0.8; }
+
         .countdown {
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 100;
             letter-spacing: 4px;
             font-variant-numeric: tabular-nums;
+            margin-top: 20px;
         }
 
-        /* AJUSTES PARA MÓVIL (Solución al corte de la R) */
         @media (max-width: 480px) {
-            .logo { 
-                font-size: 1.8rem; /* Tamaño más seguro para móvil */
-                letter-spacing: 8px; /* Menos espacio para que quepa la R */
-            }
-            .divider { margin: 35px 0; }
-            .paises { 
-                font-size: 0.75rem; 
-                letter-spacing: 3px; 
-            }
-            .coming-soon { 
-                font-size: 1rem; 
-                letter-spacing: 6px; 
-            }
-            .countdown { 
-                font-size: 2.2rem; 
-                letter-spacing: 1px; 
-            }
-        }
-
-        /* Para móviles muy estrechos */
-        @media (max-width: 350px) {
-            .logo { 
-                font-size: 1.5rem; 
-                letter-spacing: 5px; 
-            }
+            .logo { font-size: 1.8rem; letter-spacing: 6px; }
+            .coming-soon { font-size: 1rem; letter-spacing: 5px; }
+            .countdown { font-size: 2rem; }
+            .email-form { flex-direction: column; }
+            button { width: 100%; }
         }
     </style>
 </head>
@@ -106,37 +137,36 @@
     <div class="divider"></div>
 
     <div class="paises">Francia • España • Portugal</div>
-    
     <div class="coming-soon">Coming Soon</div>
 
-    <div class="countdown" id="timer">Cargando...</div>
+    <div class="newsletter-container">
+        <div class="gift-text">Únete y recibe un regalo exclusivo el día 1</div>
+        <form class="email-form">
+            <input type="email" placeholder="TU EMAIL" required>
+            <button type="submit">UNIRSE</button>
+        </form>
+    </div>
+
+    <div class="countdown" id="timer">...</div>
 
     <script>
-        // CONFIGURACIÓN: 1 de Abril de 2026 a las 21:00h
         const targetDate = new Date("April 1, 2026 21:00:00").getTime();
-
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
-
             if (distance < 0) {
                 document.getElementById("timer").innerHTML = "OPEN NOW";
                 return;
             }
-
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
             const format = (num) => num.toString().padStart(2, '0');
-
-            document.getElementById("timer").innerHTML = 
-                `${format(days)}d ${format(hours)}h ${format(minutes)}m ${format(seconds)}s`;
+            document.getElementById("timer").innerHTML = `${format(days)}d ${format(hours)}h ${format(minutes)}m ${format(seconds)}s`;
         }
-
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>
