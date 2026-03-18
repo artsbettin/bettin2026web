@@ -16,10 +16,10 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 30px;
+            padding: 20px 30px; /* Margen lateral de seguridad */
             box-sizing: border-box;
             text-align: center;
-            overflow: hidden;
+            overflow-x: hidden; /* Evita que aparezca barra de desplazamiento */
         }
 
         .logo {
@@ -29,15 +29,16 @@
             text-transform: uppercase;
             margin-bottom: 0;
             width: 100%;
+            display: block;
         }
 
         .magenta {
-            color: #CF3476; /* Tu color exacto */
+            color: #CF3476;
             font-weight: 200;
         }
 
         .divider {
-            width: 100px;
+            width: 80px;
             height: 1px;
             background-color: #CF3476;
             margin: 50px 0;
@@ -54,7 +55,7 @@
 
         .coming-soon {
             font-size: 1.6rem;
-            letter-spacing: 12px;
+            letter-spacing: 10px;
             text-transform: uppercase;
             color: #fff;
             font-weight: 300;
@@ -62,19 +63,39 @@
         }
 
         .countdown {
-            font-size: 4rem; /* Tamaño grande e impactante */
+            font-size: 4rem;
             font-weight: 100;
-            letter-spacing: 5px;
-            font-variant-numeric: tabular-nums; /* Evita que los números bailen */
+            letter-spacing: 4px;
+            font-variant-numeric: tabular-nums;
         }
 
-        /* Optimización para móviles (Vertical) */
+        /* AJUSTES PARA MÓVIL (Solución al corte de la R) */
         @media (max-width: 480px) {
-            .logo { font-size: 2.8rem; letter-spacing: 10px; }
-            .divider { margin: 40px 0; }
-            .paises { font-size: 0.8rem; letter-spacing: 4px; }
-            .coming-soon { font-size: 1.2rem; letter-spacing: 8px; }
-            .countdown { font-size: 2.5rem; letter-spacing: 2px; }
+            .logo { 
+                font-size: 1.8rem; /* Tamaño más seguro para móvil */
+                letter-spacing: 8px; /* Menos espacio para que quepa la R */
+            }
+            .divider { margin: 35px 0; }
+            .paises { 
+                font-size: 0.75rem; 
+                letter-spacing: 3px; 
+            }
+            .coming-soon { 
+                font-size: 1rem; 
+                letter-spacing: 6px; 
+            }
+            .countdown { 
+                font-size: 2.2rem; 
+                letter-spacing: 1px; 
+            }
+        }
+
+        /* Para móviles muy estrechos */
+        @media (max-width: 350px) {
+            .logo { 
+                font-size: 1.5rem; 
+                letter-spacing: 5px; 
+            }
         }
     </style>
 </head>
@@ -91,7 +112,7 @@
     <div class="countdown" id="timer">Cargando...</div>
 
     <script>
-        // CONFIGURACIÓN EXACTA: 1 de Abril de 2026 a las 21:00h
+        // CONFIGURACIÓN: 1 de Abril de 2026 a las 21:00h
         const targetDate = new Date("April 1, 2026 21:00:00").getTime();
 
         function updateCountdown() {
@@ -114,8 +135,8 @@
                 `${format(days)}d ${format(hours)}h ${format(minutes)}m ${format(seconds)}s`;
         }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
     </script>
 </body>
 </html>
