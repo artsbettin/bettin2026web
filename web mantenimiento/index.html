@@ -16,69 +16,72 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px; /* Más espacio en los bordes */
             box-sizing: border-box;
             text-align: center;
         }
 
         .logo {
-            font-size: 2rem;
-            letter-spacing: 10px;
+            font-size: 3.2rem; /* Mucho más grande */
+            letter-spacing: 15px; /* Más espaciado para que ocupe ancho */
             font-weight: 100;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             width: 100%;
         }
 
-        /* Tu color exacto: #CF3476 */
         .magenta {
-            color: #CF3476;
+            color: #CF3476; /* Tu color exacto */
             font-weight: 200;
         }
 
         .divider {
-            width: 60px; /* Línea más corta y elegante */
+            width: 80px; /* Línea un poco más larga */
             height: 1px;
-            background-color: #CF3476; /* Color magenta en la línea también */
-            margin: 30px 0;
+            background-color: #CF3476;
+            margin: 40px 0; /* Más separación */
         }
 
         .paises {
-            font-size: 0.65rem;
-            letter-spacing: 3px;
+            font-size: 0.9rem; /* Letra más legible */
+            letter-spacing: 5px;
             text-transform: uppercase;
-            color: #888;
+            color: #aaa;
             font-weight: 200;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .coming-soon {
-            font-size: 0.8rem;
-            letter-spacing: 5px;
+            font-size: 1.2rem; /* Más presencia */
+            letter-spacing: 8px;
             text-transform: uppercase;
             color: #fff;
             font-weight: 300;
-            margin-bottom: 40px;
+            margin-bottom: 60px; /* Más espacio antes del reloj */
         }
 
         .countdown {
-            font-size: 1.8rem;
+            font-size: 3.5rem; /* El reloj ahora es el protagonista */
             font-weight: 100;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             color: #fff;
         }
 
-        /* Ajustes específicos para móviles muy pequeños */
-        @media (max-width: 400px) {
+        /* Ajustes para móviles (pantallas pequeñas y verticales) */
+        @media (max-width: 480px) {
             .logo {
-                font-size: 1.5rem;
-                letter-spacing: 6px;
+                font-size: 2.2rem; /* Se ajusta para que no se corte en móvil */
+                letter-spacing: 10px;
             }
             .countdown {
-                font-size: 1.5rem;
+                font-size: 2.2rem;
             }
             .paises {
-                font-size: 0.55rem;
+                font-size: 0.7rem;
+                letter-spacing: 3px;
+            }
+            .coming-soon {
+                font-size: 0.9rem;
             }
         }
     </style>
