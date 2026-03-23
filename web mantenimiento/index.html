@@ -24,7 +24,7 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px 30px; 
+            padding: 20px 30px; /* Margen lateral de seguridad */
             box-sizing: border-box;
             text-align: center;
             overflow-x: hidden;
@@ -69,7 +69,7 @@
             margin-bottom: 50px;
             width: 100%;
             max-width: 420px;
-            min-height: 120px; /* Evita saltos de diseño al mostrar el éxito */
+            min-height: 150px; /* Espacio para el mensaje de éxito sin saltos */
         }
 
         .gift-text {
@@ -82,19 +82,20 @@
             line-height: 1.6;
         }
 
-        /* Estilo para las instrucciones de spam post-registro */
+        /* Estilo para las instrucciones de la Opción B */
         .success-instructions {
             display: none;
             text-align: center;
-            animation: fadeIn 0.5s ease forwards;
+            animation: fadeIn 0.6s ease forwards;
         }
 
         .success-instructions p {
             font-size: 0.8rem;
-            color: #ccc;
-            letter-spacing: 1px;
+            color: #888;
+            letter-spacing: 1.5px;
             line-height: 1.8;
-            margin: 10px 0;
+            margin: 8px 0;
+            text-transform: uppercase;
         }
 
         .success-instructions span {
@@ -103,7 +104,7 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -169,10 +170,11 @@
         </form>
 
         <div id="success-area" class="success-instructions">
-            <div class="gift-text" style="color: #fff; margin-bottom: 20px;">¡CASI ESTÁS DENTRO! 🖤</div>
-            <p>Revisa tu bandeja de entrada para recibir <span>El Manifiesto</span>.</p>
-            <p>Si no lo ves, busca en <i>Promociones</i> o <i>Spam</i> y <span>arrástranos a Principal</span> para ver las imágenes en alta resolución.</p>
-            <p>Dinos "HOLA" respondiendo al correo para confirmar tu acceso.</p>
+            <div class="gift-text" style="color: #fff; margin-bottom: 20px; font-size: 0.9rem;">BIENVENIDA AL CÍRCULO PRIVADO</div>
+            <p><span>El Manifiesto</span> ha sido enviado.</p>
+            <p>Si no aparece en tu bandeja principal, búscalo en <i>Promociones</i> o <i>Spam</i> y <span>reclámalo</span>.</p>
+            <p>Moverlo a tu carpeta principal garantiza que la experiencia visual sea impecable.</p>
+            <p>Una vez dentro, salúdanos con un mensaje para validar tu lugar.</p>
         </div>
     </div>
 
@@ -218,11 +220,11 @@
                 })
             })
             .then(() => {
-                // Ocultamos el mensaje inicial y el formulario
+                // Ocultar elementos de registro
                 statusMsg.style.display = 'none';
                 form.style.display = 'none';
                 
-                // Mostramos las instrucciones de éxito
+                // Mostrar instrucciones de la Opción B
                 successArea.style.display = 'block';
             })
             .catch(() => { 
